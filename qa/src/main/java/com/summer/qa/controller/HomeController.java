@@ -18,42 +18,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author     ：lightingSummer
- * @date       ：2019/6/3 0003
+ * @author ：lightingSummer
+ * @date ：2019/6/3 0003
  * @description：
  */
 @Controller
 public class HomeController {
-    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+  private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-    @Autowired
-    private UserService userService;
+  @Autowired private UserService userService;
 
-    @Autowired
-    private QuestionService questionService;
+  @Autowired private QuestionService questionService;
 
-    @RequestMapping(value = {"/user/{userId}"}, method = RequestMethod.GET)
-    public String userIndex(Model model, @PathVariable int userId) {
-        model.addAttribute("vos", getQuestions(userId, 0, 10));
-        return "index";
+  @RequestMapping(
+      value = {"/user/{userId}"},
+      method = RequestMethod.GET)
+  public String userIndex(Model model, @PathVariable int userId) {
+    model.addAttribute("vos", getQuestions(userId, 0, 10));
+    return "index";
+  }
+
+  @RequestMapping(
+      value = {"/", "/index"},
+      method = RequestMethod.GET)
+  public String index(Model model) {
+    model.addAttribute("vos", getQuestions(0, 0, 10));
+    return "index";
+  }
+
+  private List<ViewObject> getQuestions(int userId, int page, int limit) {
+    List<ViewObject> vos = new ArrayList<>();
+    List<Question> questions = questionService.getLatestQuestions(userId, page, limit);
+    for (Question question : questions) {
+      ViewObject vo = new ViewObject();
+      User user = userService.getUserById(question.getUserId());
+      vo.set("user", user);
+      vo.set("question", question);
+      vos.add(vo);
     }
-
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
-        model.addAttribute("vos", getQuestions(0, 0, 10));
-        return "index";
-    }
-
-    private List<ViewObject> getQuestions(int userId, int page, int limit) {
-        List<ViewObject> vos = new ArrayList<>();
-        List<Question> questions = questionService.getLatestQuestions(userId, page, limit);
-        for (Question question : questions) {
-            ViewObject vo = new ViewObject();
-            User user = userService.getUserById(question.getUserId());
-            vo.set("user", user);
-            vo.set("question", question);
-            vos.add(vo);
-        }
-        return vos;
-    }
+    return vos;
+  }
 }
