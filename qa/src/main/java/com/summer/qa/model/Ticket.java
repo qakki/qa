@@ -6,14 +6,13 @@ import java.util.Date;
 
 @Data
 public class Ticket {
-    private Integer id;
+  private Integer id;
 
-    private Integer userId;
+  private Integer userId;
 
-    private String ticket;
+  private String ticket;
 
-    private Date expired;
+  private Date expired;
 
-    private Integer status;
-
+  private Integer status;
 }

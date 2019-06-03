@@ -6,18 +6,17 @@ import java.util.Date;
 
 @Data
 public class Question {
-    private Integer id;
+  private Integer id;
 
-    private String title;
+  private String title;
 
-    private Integer userId;
+  private Integer userId;
 
-    private Date createdDate;
+  private Date createdDate;
 
-    private Integer commentCount;
+  private Integer commentCount;
 
-    private Integer isDel;
+  private Integer isDel;
 
-    private String content;
-
+  private String content;
 }

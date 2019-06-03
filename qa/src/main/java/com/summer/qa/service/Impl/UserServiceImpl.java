@@ -7,23 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author     ：lightingSummer
- * @date       ：2019/6/3 0003
+ * @author ：lightingSummer
+ * @date ：2019/6/3 0003
  * @description：
  */
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+  @Autowired private UserMapper userMapper;
 
-    /**
-     * @author: lightingSummer
-     * @date: 2019/6/3 0003
-     * @description: 根据id获取用户信息
-     */
-    @Override
-    public User getUserById(int id) {
-        return  userMapper.selectByPrimaryKey(id);
-    }
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/3 0003
+   * @description: 根据id获取用户信息
+   */
+  @Override
+  public User getUserById(int id) {
+    return userMapper.selectByPrimaryKey(id);
+  }
 }
