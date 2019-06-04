@@ -17,41 +17,40 @@ import java.util.Date;
 @SpringBootTest
 public class QaApplicationTests {
 
-    @Autowired
-    private UserMapper userMapper;
+  @Autowired private UserMapper userMapper;
 
-    @Autowired
-    private QuestionMapper questionMapper;
+  @Autowired private QuestionMapper questionMapper;
 
-    @Autowired
-    private QuestionService questionService;
+  @Autowired private QuestionService questionService;
 
-    @Test
-    public void contextLoads() {
+  @Test
+  public void contextLoads() {}
+
+  @Test
+  public void userTest1() {
+    User user = new User();
+    user.setName("鹧鸪天");
+    user.setSalt("123");
+    user.setPassword("123");
+    user.setHeadUrl("http://ps2a1gxx1.bkt.clouddn.com/44188a19512f4bd6b022886877901705.jpg");
+    userMapper.insertSelective(user);
+  }
+
+  @Test
+  public void userTest2() {
+    System.out.println(userMapper.selectByName("青杏儿"));
+  }
+
+  @Test
+  public void questionTest1() {
+    for (int i = 0; i < 10; i++) {
+      Question question = new Question();
+      question.setTitle("Question" + i);
+      question.setUserId(1);
+      question.setCreatedDate(new Date());
+      question.setContent("content");
+      questionMapper.insertSelective(question);
     }
-
-    @Test
-    public void userTest(){
-        User user=new User();
-        user.setName("鹧鸪天");
-        user.setSalt("123");
-        user.setPassword("123");
-        user.setHeadUrl("http://ps2a1gxx1.bkt.clouddn.com/44188a19512f4bd6b022886877901705.jpg");
-        userMapper.insertSelective(user);
-    }
-
-    @Test
-    public void questionTest(){
-        /*
-        for(int i=0;i<10;i++){
-            Question question=new Question();
-            question.setTitle("Question"+i);
-            question.setUserId(1);
-            question.setCreatedDate(new Date());
-            question.setContent("content");
-            questionMapper.insertSelective(question);
-        }*/
-        System.out.println(questionService.getLatestQuestions(1,1,5));
-    }
-
+    System.out.println(questionService.getLatestQuestions(1, 1, 5));
+  }
 }

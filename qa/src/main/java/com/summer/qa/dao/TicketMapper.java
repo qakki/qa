@@ -51,4 +51,22 @@ public interface TicketMapper {
     "where id = #{id,jdbcType=INTEGER}"
   })
   int updateByPrimaryKey(Ticket record);
+
+  @Update({"update tb_ticket", "set status = #{status}", "where ticket = #{ticket}"})
+  int updateStatusByTicket(@Param("ticket") String ticket, @Param("status") int status);
+
+  @Select({
+    "select",
+    "id, user_id, ticket, expired, status",
+    "from tb_ticket",
+    "where ticket = #{ticket}"
+  })
+  @Results({
+    @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+    @Result(column = "user_id", property = "userId", jdbcType = JdbcType.INTEGER),
+    @Result(column = "ticket", property = "ticket", jdbcType = JdbcType.VARCHAR),
+    @Result(column = "expired", property = "expired", jdbcType = JdbcType.TIMESTAMP),
+    @Result(column = "status", property = "status", jdbcType = JdbcType.INTEGER)
+  })
+  Ticket selectByTicket(String ticket);
 }

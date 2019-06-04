@@ -36,7 +36,9 @@ public class LogAspect {
     StringBuilder sb = new StringBuilder();
     sb.append("The params is ");
     for (Object arg : jp.getArgs()) {
-      sb.append(arg.getClass() + ":" + arg.toString() + ",");
+      if (arg != null) {
+        sb.append(arg.toString() + ",");
+      }
     }
     String name = jp.getSignature().getName();
     logger.info(name + " started. " + sb.toString());

@@ -53,4 +53,12 @@ public interface UserMapper {
     "where id = #{id,jdbcType=INTEGER}"
   })
   int updateByPrimaryKey(User record);
+
+  @Select({
+    "select",
+    "id, name, password, salt, head_url, auth",
+    "from tb_user",
+    "where name = #{name}"
+  })
+  User selectByName(String name);
 }
