@@ -12,4 +12,8 @@ import java.util.List;
 public interface QuestionService {
 
   List<Question> getLatestQuestions(int userId, int page, int limit);
+
+  int addQuestion(Question question);
+
+  Question getQuestionById(int id);
 }

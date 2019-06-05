@@ -53,4 +53,16 @@ public class QaApplicationTests {
     }
     System.out.println(questionService.getLatestQuestions(1, 1, 5));
   }
+
+  @Test
+  public void questionTest2() {
+
+    Question question = new Question();
+    question.setTitle("QuestionTemp");
+    question.setUserId(1);
+    question.setCreatedDate(new Date());
+    question.setContent("content");
+
+    System.out.println(questionService.addQuestion(question));
+  }
 }

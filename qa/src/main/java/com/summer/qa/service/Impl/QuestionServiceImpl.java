@@ -4,8 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.summer.qa.dao.QuestionMapper;
 import com.summer.qa.model.Question;
 import com.summer.qa.service.QuestionService;
+import com.summer.qa.service.SensitiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
@@ -18,16 +20,36 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
 
   @Autowired private QuestionMapper questionMapper;
+  @Autowired private SensitiveService sensitiveService;
 
   /**
    * @author: lightingSummer
    * @date: 2019/6/3 0003
    * @description: 获取最新的question
-   * @return java.util.List<com.summer.qa.model.Question>
    */
   @Override
   public List<Question> getLatestQuestions(int userId, int page, int limit) {
     PageHelper.startPage(page, limit);
     return questionMapper.selectByIdAndTimeDesc(userId);
+  }
+
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/5 0005
+   * @description: 添加问题 返回主键
+   */
+  @Override
+  public int addQuestion(Question question) {
+    question.setTitle(HtmlUtils.htmlEscape(question.getTitle()));
+    question.setContent(HtmlUtils.htmlEscape(question.getContent()));
+    // 敏感词过滤
+    question.setTitle(sensitiveService.filter(question.getTitle()));
+    question.setContent(sensitiveService.filter(question.getContent()));
+    return questionMapper.insertSelective(question) > 0 ? question.getId() : 0;
+  }
+
+  @Override
+  public Question getQuestionById(int id) {
+    return questionMapper.selectByPrimaryKey(id);
   }
 }
