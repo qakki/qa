@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface CommentMapper {
@@ -68,4 +70,29 @@ public interface CommentMapper {
     "where id = #{id,jdbcType=INTEGER}"
   })
   int updateByPrimaryKey(Comment record);
+
+  @Select({
+    "select count(0)",
+    "from tb_comment",
+    "where entity_id=#{entityId} and entity_type=#{entityType} and is_del=0"
+  })
+  int selectCountByEntity(@Param("entityType") int entityType, @Param("entityId") int entityId);
+
+  @Select({
+    "select",
+    "id, user_id, entity_id, entity_type, add_time, is_del, content",
+    "from tb_comment",
+    "where entity_id=#{entityId} and entity_type=#{entityType} and is_del=0"
+  })
+  @Results({
+    @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true),
+    @Result(column = "user_id", property = "userId", jdbcType = JdbcType.INTEGER),
+    @Result(column = "entity_id", property = "entityId", jdbcType = JdbcType.INTEGER),
+    @Result(column = "entity_type", property = "entityType", jdbcType = JdbcType.INTEGER),
+    @Result(column = "add_time", property = "addTime", jdbcType = JdbcType.TIMESTAMP),
+    @Result(column = "is_del", property = "isDel", jdbcType = JdbcType.INTEGER),
+    @Result(column = "content", property = "content", jdbcType = JdbcType.LONGVARCHAR)
+  })
+  List<Comment> selectCommentsByEntity(
+      @Param("entityType") int entityType, @Param("entityId") int entityId);
 }

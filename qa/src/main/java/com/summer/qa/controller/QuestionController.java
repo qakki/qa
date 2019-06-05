@@ -1,10 +1,14 @@
 package com.summer.qa.controller;
 
+import com.summer.qa.model.Comment;
 import com.summer.qa.model.HostHolder;
 import com.summer.qa.model.Question;
+import com.summer.qa.model.ViewObject;
+import com.summer.qa.service.CommentService;
 import com.summer.qa.service.QuestionService;
 import com.summer.qa.service.UserService;
 import com.summer.qa.util.QAUtil;
+import com.summer.qa.util.SettingUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author ：lightingSummer
@@ -26,6 +32,7 @@ public class QuestionController {
   @Autowired private QuestionService questionService;
   @Autowired private UserService userService;
   @Autowired private HostHolder hostHolder;
+  @Autowired private CommentService commentService;
 
   @RequestMapping(
       path = {"/question/add"},
@@ -60,6 +67,16 @@ public class QuestionController {
       Question question = questionService.getQuestionById(qid);
       model.addAttribute("question", question);
       model.addAttribute("user", userService.getUserById(question.getUserId()));
+      // 查阅评论
+      List<ViewObject> vos = new ArrayList<>();
+      List<Comment> comments = commentService.getCommentsByEntity(SettingUtil.ENTITY_QUESTION, qid);
+      for (Comment comment : comments) {
+        ViewObject vo = new ViewObject();
+        vo.set("comment", comment);
+        vo.set("user", userService.getUserById(comment.getUserId()));
+        vos.add(vo);
+      }
+      model.addAttribute("comments", vos);
     } catch (Exception e) {
       logger.error("get question detail failed " + e.getMessage());
     }

@@ -28,15 +28,11 @@ public class SensitiveServiceImpl implements SensitiveService, InitializingBean 
 
   private TrieNode root = new TrieNode();
 
-  public static void main(String[] args) {
-    SensitiveServiceImpl ss = new SensitiveServiceImpl();
-    ss.addWord("敏感词");
-    String a = "是与非";
-    String b = "是与非敏！！感词是与非敏***感//词是与非";
-    System.out.println(ss.filter(a));
-    System.out.println(ss.filter(b));
-  }
-
+  /**
+   * public static void main(String[] args) { SensitiveServiceImpl ss = new SensitiveServiceImpl();
+   * ss.addWord("敏感词"); String a = "是与非"; String b = "是与非敏！！感词是与非敏***感//词是与非";
+   * System.out.println(ss.filter(a)); System.out.println(ss.filter(b)); }
+   */
   @Override
   public void afterPropertiesSet() throws Exception {
     root = new TrieNode();

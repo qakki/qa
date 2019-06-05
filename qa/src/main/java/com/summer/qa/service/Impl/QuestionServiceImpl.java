@@ -48,8 +48,26 @@ public class QuestionServiceImpl implements QuestionService {
     return questionMapper.insertSelective(question) > 0 ? question.getId() : 0;
   }
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/5 0005
+   * @description: 根据主键获取Question
+   */
   @Override
   public Question getQuestionById(int id) {
     return questionMapper.selectByPrimaryKey(id);
+  }
+
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/5 0005
+   * @description : 更新Question评论数量
+   */
+  @Override
+  public int updateCommentCount(int id, int commentCount) {
+    Question question = new Question();
+    question.setId(id);
+    question.setCommentCount(commentCount);
+    return questionMapper.updateByPrimaryKeySelective(question);
   }
 }
