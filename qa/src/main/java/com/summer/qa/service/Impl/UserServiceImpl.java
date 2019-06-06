@@ -155,6 +155,16 @@ public class UserServiceImpl implements UserService {
 
   /**
    * @author: lightingSummer
+   * @date: 2019/6/6 0006
+   * @description: 通过name获取用户
+   */
+  @Override
+  public User getUserByName(String name) {
+    return userMapper.selectByName(name);
+  }
+
+  /**
+   * @author: lightingSummer
    * @date: 2019/6/4 0004
    * @description: 增加用户登录ticket
    */

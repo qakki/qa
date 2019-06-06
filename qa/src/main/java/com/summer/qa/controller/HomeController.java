@@ -30,6 +30,11 @@ public class HomeController {
 
   @Autowired private QuestionService questionService;
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/4 0006
+   * @description: 用户主页
+   */
   @RequestMapping(
       value = {"/user/{userId}"},
       method = RequestMethod.GET)
@@ -38,6 +43,11 @@ public class HomeController {
     return "index";
   }
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/4 0006
+   * @description: 主页
+   */
   @RequestMapping(
       value = {"/", "/index"},
       method = RequestMethod.GET)
@@ -46,6 +56,11 @@ public class HomeController {
     return "index";
   }
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/4 0006
+   * @description: 获取问题
+   */
   private List<ViewObject> getQuestions(int userId, int page, int limit) {
     List<ViewObject> vos = new ArrayList<>();
     List<Question> questions = questionService.getLatestQuestions(userId, page, limit);

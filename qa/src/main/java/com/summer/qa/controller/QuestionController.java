@@ -34,6 +34,11 @@ public class QuestionController {
   @Autowired private HostHolder hostHolder;
   @Autowired private CommentService commentService;
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/4 0006
+   * @description: 添加问题
+   */
   @RequestMapping(
       path = {"/question/add"},
       method = {RequestMethod.POST})
@@ -59,6 +64,11 @@ public class QuestionController {
     return QAUtil.getJSONString(1, "发布问题失败");
   }
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/4 0006
+   * @description: 问题详情页
+   */
   @RequestMapping(
       path = {"/question/{qid}"},
       method = {RequestMethod.GET, RequestMethod.POST})

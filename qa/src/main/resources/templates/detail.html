@@ -1,162 +1,154 @@
 #parse("header.html")
-<link rel="stylesheet" href="../styles/detail.css">
-<div class="zg-wrap zu-main clearfix with-indention-votebar" itemscope="" itemtype="http://schema.org/Question"
-     id="zh-single-question-page" data-urltoken="36301524" role="main">
-    <div class="zu-main-content">
-        <div class="zu-main-content-inner">
-            <meta itemprop="isTopQuestion" content="false">
-            <meta itemprop="visitsCount" content="402">
-            <!--
-            <div class="zm-tag-editor zg-section">
-                <div class="zm-tag-editor-labels zg-clear">
-                    <a data-tip="t$b$19550730" class="zm-item-tag" href="">新浪微博</a>
-                    <a data-tip="t$b$19554412" class="zm-item-tag" href="">网络营销</a>
-                    <a data-tip="t$b$19559739" class="zm-item-tag" href="">微博粉丝</a>
-                    <a data-tip="t$b$19560290" class="zm-item-tag" href="">僵尸粉</a>
-                    <a data-tip="t$b$19565757" class="zm-item-tag" href="">网络水军</a>
-                    <a href="javascript:;" class="zu-edit-button" name="edit">
-                        <i class="zu-edit-button-icon"></i>修改</a>
-                </div>
-            </div>
-            -->
-            <div id="zh-question-title" data-editable="true" class="zm-editable-status-normal">
-                <h2 class="zm-item-title">
+<div id="main">
+    <div class="container">
+        <div class="post detail">
 
-                    <span class="zm-editable-content">$!{question.title}</span>
-
-                </h2>
-            </div>
-            <div id="zh-question-detail" class="zm-item-rich-text zm-editable-status-normal">
-                <div class="zm-editable-content">$!{question.content}</div>
-            </div>
-            <div class="zm-side-section">
-                <div class="zm-side-section-inner" id="zh-question-side-header-wrap">
-                    <button data-follow="q:m:button" class="follow-button zg-follow zg-btn-green" data-id="6727688">
-                        关注问题
-                    </button>
-                    <div class="zh-question-followers-sidebar">
-                        <div class="zg-gray-normal">
-                            <a href="">
-                                <strong>9</strong></a>人关注该问题
-                        </div>
-                        <div class="list zu-small-avatar-list zg-clear">
-                                <span class="zm-item-link-avatar">
-                                    <img title="匿名用户" class="zm-item-img-avatar"
-                                         src="../images/res/aadd7b895_s.jpg"></span>
-                            <a data-tip="p$b$yi-yi-98-91-99" class="zm-item-link-avatar" href=""
-                               data-original_title="奕奕">
-                                <img src="../images/res/6ceea810748d179f57cac0baa5cf9592_s.jpg"
-                                     class="zm-item-img-avatar"></a>
-                            <a data-tip="p$b$wang-wu-29-54" class="zm-item-link-avatar" href=""
-                               data-original_title="王五">
-                                <img src="../images/res/da8e974dc_s.jpg" class="zm-item-img-avatar"></a>
-                            <a data-tip="p$b$huang-xiang-90-99" class="zm-item-link-avatar" href=""
-                               data-original_title="案小声">
-                                <img src="../images/res/19456ebfe8b207320735f282769ac635_s.jpg"
-                                     class="zm-item-img-avatar"></a>
-                            <a data-tip="p$b$yingxiaodao" class="zm-item-link-avatar" href="" data-original_title="营销岛">
-                                <img src="../images/res/11be4a90ed938abfbab4899df56ee754_s.png"
-                                     class="zm-item-img-avatar"></a>
-                            <a data-tip="p$b$hero-hou-23" class="zm-item-link-avatar" href=""
-                               data-original_title="Hero Hou">
-                                <img src="../images/res/da8e974dc_s.jpg" class="zm-item-img-avatar"></a>
-                            <a data-tip="p$b$jin-hua-zhang-10" class="zm-item-link-avatar" href=""
-                               data-original_title="荷尔蒙毒品">
-                                <img src="../images/res/d207854fffc9e0289fbd6bbbb3986988_s.jpg"
-                                     class="zm-item-img-avatar"></a>
-                            <a title="宇轩" data-tip="p$t$yu-xuan-91-11" class="zm-item-link-avatar" href="">
-                                <img src="../images/res/1ac7840eeb19ada0bbf85f51702d5784_s.jpg"
-                                     class="zm-item-img-avatar"></a>
-                            <a title="尹锋" data-tip="p$t$yin-feng" class="zm-item-link-avatar" href="">
-                                <img src="../images/res/da8e974dc_s.jpg" class="zm-item-img-avatar"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="zh-question-answer-wrap" data-pagesize="10" class="zh-question-answer-wrapper navigable"
-                 data-widget="navigable" data-navigable-options="{&quot;items&quot;: &quot;&gt;.zm-item-answer&quot;}"
-                 data-init="{&quot;params&quot;: {&quot;url_token&quot;: 36301524, &quot;pagesize&quot;: 10, &quot;offset&quot;: 0}, &quot;nodename&quot;: &quot;QuestionAnswerListV2&quot;}">
-
-                #foreach($comment in $comments)
-                <div tabindex="-1" class="zm-item-answer  zm-item-expanded" itemprop="topAnswer" itemscope=""
-                     itemtype="http://schema.org/Answer" data-aid="22162611" data-atoken="66862039" data-collapsed="0"
-                     data-created="1444310527" data-deleted="0" data-helpful="1" data-isowner="0" data-copyable="1"
-                     data-za-module="AnswerItem">
-                    <link itemprop="url" href="">
-                    <meta itemprop="answer-id" content="22162611">
-                    <meta itemprop="answer-url-token" content="66862039">
-                    <a class="zg-anchor-hidden" name="answer-22162611"></a>
-                    <div class="zm-votebar goog-scrollfloater" data-za-module="VoteBar">
-                        <button class="up" aria-pressed="false" title="赞同">
-                            <i class="icon vote-arrow"></i>
-                            <span class="count">28</span>
-                            <span class="label sr-only">赞同</span></button>
-                        <button class="down" aria-pressed="false" title="反对，不会显示你的姓名">
-                            <i class="icon vote-arrow"></i>
-                            <span class="label sr-only">反对，不会显示你的姓名</span></button>
-                    </div>
-                    <div class="answer-head">
-                        <div class="zm-item-answer-author-info">
-                            <a class="zm-item-link-avatar avatar-link" href="" target="_blank"
-                               data-tip="p$t$yingxiaodao">
-                                <img src="$comment.user.headUrl"
-                                     class="zm-list-avatar avatar"></a>
-                            <a class="author-link" target="_blank" href="/user/$comment.user.id">$comment.user.name</a>
-                            </div>
-                        <div class="zm-item-vote-info" data-votecount="28" data-za-module="VoteInfo">
-                                <span class="voters text">
-                                    <a href="" class="more text">
-                                        <span class="js-voteCount">28</span>&nbsp;人赞同</a></span>
-                        </div>
-                    </div>
-                    <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="6727688"
-                         data-action="/answer/content" data-author-name="营销岛"
-                         data-entry-url="/question/36301524/answer/66862039">
-                        <div class="zm-editable-content clearfix">
-                            $comment.comment.content
-                        </div>
-                    </div>
-                    <a class="zg-anchor-hidden ac" name="22162611-comment"></a>
-                    <div class="zm-item-meta answer-actions clearfix js-contentActions">
-                        <div class="zm-meta-panel">
-                            <a itemprop="url" class="answer-date-link meta-item" target="_blank" href="">发布于
-                                $date.format('yyyy-MM-dd HH:mm:ss', $comment.comment.createdDate)</a>
-
-                            <!--
-                            <a href="" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
-                                <i class="z-icon-comment"></i>4 条评论</a>
-                            <a href="" class="meta-item zu-autohide js-thank" data-thanked="false">
-                                <i class="z-icon-thank"></i>感谢</a>
-
-                            <button class="item-collapse js-collapse" style="transition: none;">
-                                <i class="z-icon-fold"></i>收起
-                            </button>
-                            -->
-                        </div>
-                    </div>
-                </div>
+            <div class="votebar">
+                #if($like>0)
+                <button class="click-like up pressed" data-id="$!{news.id}" title="赞同"><i class="vote-arrow"></i><span class="count">$!{news.likeCount}</span></button>
+                #else
+                <button class="click-like up" data-id="$!{news.id}" title="赞同"><i class="vote-arrow"></i><span class="count">$!{news.likeCount}</span></button>
+                #end
+                #if($like<0)
+                <button class="click-dislike down pressed" data-id="$!{news.id}" title="反对"><i class="vote-arrow"></i></button>
+                #else
+                <button class="click-dislike down" data-id="$!{news.id}" title="反对"><i class="vote-arrow"></i></button>
                 #end
             </div>
-            <a name="draft"></a>
-            <form action="/addComment" method="post" id="commentform">
-                <input type="hidden" name="questionId" value="$question.id"/>
-            <div id="zh-question-answer-form-wrap" class="zh-question-answer-form-wrap">
-                <div class="zm-editable-editor-wrap" style="">
-                    <div class="zm-editable-editor-outer">
-                        <div class="zm-editable-editor-field-wrap">
-                            <textarea name="content" id="content" class="zm-editable-editor-field-element editable" style="font-style: italic;width:100%;"></textarea>
-                        </div>
-                    </div>
 
-                    <div class="zm-command clearfix">
-                            <span class=" zg-right">
-                                <button type="submit" class="submit-button zg-btn-blue">发布回答</button></span>
+            <div class="content">
+                <div class="content-img">
+                    <img src="$!{news.image}" alt="">
+                </div>
+                <div class="content-main">
+                    <h3 class="title">
+                        <a target="_blank" rel="external nofollow" href="$!{news.link}">$!{news.title}</a>
+                    </h3>
+                    <div class="meta">
+                        $!{news.link}
+                              <span>
+                                  <i class="fa icon-comment"></i> $!{news.commentCount}
+                              </span>
                     </div>
                 </div>
             </div>
-            </form>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <a href="/user/$!{owner.id}"><img width="32" class="img-circle" src="$!{owner.headUrl}"></a>
+                </div>
+                <!--
+                <div class="info">
+                    <h5>分享者</h5>
 
+                    <a href="http://nowcoder.com/u/125701"><img width="48" class="img-circle" src="http://images.nowcoder.com/images/20141231/622873_1420036789276_622873_1420036771761_%E8%98%91%E8%8F%87.jpg@0e_200w_200h_0c_1i_1o_90Q_1x" alt="Thumb"></a>
+
+                    <h4 class="m-b-xs">影浅</h4>
+                    <a class="btn btn-default btn-xs" href="http://nowcoder.com/signin"><i class="fa icon-eye"></i> 关注TA</a>
+                </div>
+                -->
+            </div>
+
+            <div class="subject-name">来自 <a href="/user/$!{owner.id}">$!{owner.name}</a></div>
         </div>
+        <!--
+        <div class="social-share-button text-center" data-title="读《Web 全栈工程师的自我修养》 http://nowcoder.com/posts/wt2rwy 分享自 @影浅 创建的《web开发的愚人之旅》 http://nowcoder.com/subjects/2245( 想看更多？下载 @牛客网 app：http://nowcoder.com/download )" data-type="text" data-url="null" data-img="http://nowcoder.com/screenshots/8/469448.png">
+            <h5>分享到</h5>
+            <a href="javascript:;" class="btn btn-danger" rel="external nofollow" data-site="weibo" onclick="return SocialShareButton.share(this);"><i class="fa icon-weibo"></i> 微博</a>
+            <span class="dropdown weixin-qrcode-dropdown">
+                <button class="btn btn-success" id="weixin-qrcode" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa icon-weixin"></i> 微信</button>
+                <span class="dropdown-menu weixin-qrcode-dropdown-menu" aria-labelledby="weixin-qrcode" data-url="http://nowcoder.com/posts/wt2rwy">
+                    <span class="weixin-qrcode" aria-labelledby="weixin-qrcode" data-url="http://nowcoder.com/posts/wt2rwy"><canvas width="132" height="132"></canvas></span>扫描二维码<br>下载牛客网
+                </span>
+            </span>
+        </div>
+        <div role="alert" class="alert alert-warning subscribe-banner">
+            使用《头条八卦》客户端，拥有更好的阅读体验。
+            <a href="http://nowcoder.com/download?ref=web_posts" target="_blank" title="牛客网客户端" class="btn btn-info btn-sm pull-right">立即体验</a>
+        </div>
+        -->
+
+        <div class="post-comment-form">
+            #if($user)
+            <span>评论 ($!{news.commentCount})</span>
+            <form method="post" action="/addComment">
+                <input name="newsId" type="hidden" value="$!{news.id}">
+
+                <div class="form-group text required comment_content">
+                    <label class="text required sr-only">
+                        <abbr title="required">*</abbr> 评论</label>
+                    <textarea rows="5" class="text required comment-content form-control" name="content" id="content"></textarea>
+                </div>
+                <div class="text-right">
+                    <input type="submit" name="commit" value="提 交" class="btn btn-default btn-info">
+                </div>
+            </form>
+            #else
+            <div class="login-actions">
+                <a class="btn btn-success" href="/?pop=1">登录后评论</a>
+            </div>
+            #end
+        </div>
+
+        <div id="comments" class="comments">
+            #foreach($commentvo in $comments)
+            <div class="media">
+                <a class="media-left" href="/user/$!{commentvo.user.id}">
+                    <img src="$!{commentvo.user.headUrl}">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <small class="date">$date.format('yyyy-MM-dd HH:mm:ss', $!{commentvo.comment.createdDate})
+                        </small>
+                    </h4>
+                    <div>$!{commentvo.comment.content}</div>
+                </div>
+            </div>
+            #end
+        </div>
+
     </div>
+    <script type="text/javascript">
+          $(function(){
+
+            // If really is weixin
+            $(document).on('WeixinJSBridgeReady', function() {
+
+              $('.weixin-qrcode-dropdown').show();
+
+              var options = {
+                "img_url": "",
+                "link": "http://nowcoder.com/j/wt2rwy",
+                "desc": "",
+                "title": "读《Web 全栈工程师的自我修养》"
+              };
+
+              WeixinJSBridge.on('menu:share:appmessage', function (argv){
+                WeixinJSBridge.invoke('sendAppMessage', options, function (res) {
+                  // _report('send_msg', res.err_msg)
+                });
+              });
+
+              WeixinJSBridge.on('menu:share:timeline', function (argv) {
+                WeixinJSBridge.invoke('shareTimeline', options, function (res) {
+                  // _report('send_msg', res.err_msg)
+                });
+              });
+
+              // $(window).on('touchmove scroll', function() {
+              //   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+              //     $('div.backdrop').show();
+              //     $('div.share-help').show();
+              //   } else {
+              //     $('div.backdrop').hide();
+              //     $('div.share-help').hide();
+              //   }
+              // });
+
+            });
+
+          })
+
+    </script>
+    <script type="text/javascript" src="/scripts/main/site/detail.js"></script>
 </div>
 #parse("footer.html")

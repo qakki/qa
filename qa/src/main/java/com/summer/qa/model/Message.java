@@ -19,4 +19,12 @@ public class Message {
   private String conversationId;
 
   private String content;
+
+  public String getConversationId() {
+    if (fromId > toId) {
+      return String.format("%d_%d", toId, fromId);
+    } else {
+      return String.format("%d_%d", fromId, toId);
+    }
+  }
 }

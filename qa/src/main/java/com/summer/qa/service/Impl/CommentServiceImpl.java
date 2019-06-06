@@ -20,7 +20,7 @@ public class CommentServiceImpl implements CommentService {
 
   @Override
   public int addComment(Comment comment) {
-    return commentMapper.insertSelective(comment);
+    return commentMapper.insertSelective(comment) > 0 ? comment.getId() : 0;
   }
 
   @Override

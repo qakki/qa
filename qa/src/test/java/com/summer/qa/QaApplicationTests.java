@@ -1,7 +1,9 @@
 package com.summer.qa;
 
+import com.summer.qa.dao.MessageMapper;
 import com.summer.qa.dao.QuestionMapper;
 import com.summer.qa.dao.UserMapper;
+import com.summer.qa.model.Message;
 import com.summer.qa.model.Question;
 import com.summer.qa.model.User;
 import com.summer.qa.service.QuestionService;
@@ -22,6 +24,8 @@ public class QaApplicationTests {
   @Autowired private QuestionMapper questionMapper;
 
   @Autowired private QuestionService questionService;
+
+  @Autowired private MessageMapper messageMapper;
 
   @Test
   public void contextLoads() {}
@@ -64,5 +68,18 @@ public class QaApplicationTests {
     question.setContent("content");
 
     System.out.println(questionService.addQuestion(question));
+  }
+
+  @Test
+  public void messageTest1() {
+    Message message = new Message();
+    message.setFromId(1);
+    message.setToId(7);
+    System.out.println(message.getConversationId());
+  }
+
+  @Test
+  public void messageTest2() {
+    System.out.println(messageMapper.selectConversationListByUserId(22));
   }
 }

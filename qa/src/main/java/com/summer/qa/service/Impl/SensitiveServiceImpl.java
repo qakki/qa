@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -55,13 +56,14 @@ public class SensitiveServiceImpl implements SensitiveService, InitializingBean 
   /**
    * @author: lightingSummer
    * @date: 2019/6/5 0005
-   * @description: 过滤敏感字符
+   * @description: 过滤敏感字符+html过滤
    */
   @Override
   public String filter(String text) {
     if (StringUtils.isBlank(text)) {
       return text;
     }
+    text = HtmlUtils.htmlEscape(text);
     String replacement = DEFAULT_REPLACEMENT;
     StringBuilder sb = new StringBuilder();
     TrieNode tempNode = root;

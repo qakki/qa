@@ -4,12 +4,7 @@ var oPopup = new Popup({
    content: String, 内容
    width: Number, 宽度
    close: Function, 关闭的回调
-   cancel: Function, 取消的回调
-   ok: Function, 确定的回调
    hasNoHeader: Boolean, true 没有头部
-   hasNoFooter: Boolean, true 没有底部
-   cancelTxt: 取消文案
-   okTxt: 确认文案
 });
  */
 (function (window, undefined) {
@@ -18,21 +13,12 @@ var oPopup = new Popup({
     Base.mix(Popup, Component, {
         zIndex: 100,
         _tpl: [
-            '<div class="modal-dialog absolute-position" style="margin:0;padding:0;">',
-                '<div class="modal-dialog-title js-head">',
-                    '<span class="modal-dialog-title-text js-title">#{title}</span>',
-                    '<span class="modal-dialog-title-close js-close"></span>',
+            '<div class="pop-box">',
+                '<div class="pop-title">',
+                    '<a href="javascript:void(0);" class="pop-close js-close" title="关闭"></a>',
+                    '<h1>#{title}</h1>',
                 '</div>',
-                '<div class="modal-dialog-content">',
-                    '<div class="zh-add-question-form">',
-                        '<div class="js-content">#{content}</div>',
-                        '<div class="zm-command js-footer">',
-                            '<span style="display:none;margin-left:10px;line-height:30px;float:left;color:#c33;" class="js-error"></span>',
-                            '<a href="javascript:void(0);" class="zm-command-cancel js-cancel">#{cancelTxt}</a>',
-                            '<a href="javascript:void(0);" class="zg-r5px zu-question-form-add zg-btn-blue js-ok">#{okTxt}</a>',
-                        '</div>',
-                    '</div>',
-                '</div>',
+                '<div class="pop-content">#{content}</div>',
             '</div>'].join(''),
         listeners: [{
             name: 'render',
@@ -42,9 +28,7 @@ var oPopup = new Popup({
                 var oConf = that.rawConfig;
                 var oEl = that.getEl();
                 // 常用元素
-                that.titleEl = oEl.find('span.js-title');
-                that.contentEl = oEl.find('div.js-content');
-                that.tipsEl = oEl.find('span.js-error');
+                that.contentEl = oEl.find('div.pop-content');
                 // 调整大小
                 oEl.outerWidth(oConf.width || 520);
                 oConf.height && that.contentEl.outerHeight(oConf.height);
@@ -55,9 +39,7 @@ var oPopup = new Popup({
                 // 调整z-index
                 oEl.css('zIndex', Popup.zIndex++);
                 // 去掉头部
-                oConf.hasNoHeader && oEl.find('div.js-head').remove();
-                // 去掉底部
-                oConf.hasNoFooter && oEl.find('div.js-footer').remove();
+                oConf.hasNoHeader && oEl.find('div.pop-title').remove();
                 // 位置居中
                 that.fixPosition();
                 // 绑定窗口变化事件
@@ -65,41 +47,10 @@ var oPopup = new Popup({
                 $(window).resize(that.resizeCb);
             }
         }, {
-            name: 'destroy',
-            type: 'custom',
-            handler: function () {
-                var that = this;
-                // 启动滚动
-                !that.isForbidScroll && that.forbidScroll(document.body, false);
-                // 移除遮罩层
-                that.maskEl && that.maskEl.remove();
-                // 取消窗口变化事件
-                $(window).unbind('resize', that.resizeCb);
-            }
-        }, {
             name: 'click .js-close',
             handler: function () {
                 var that = this;
                 that.close();
-            }
-        }, {
-            name: 'click .js-cancel',
-            handler: function () {
-                var that = this;
-                var oConf = that.rawConfig;
-                oConf.cancel && oConf.cancel.call(that);
-                that.close(true);
-            }
-        }, {
-            name: 'click .js-ok',
-            handler: function () {
-                var that = this;
-                var oConf = that.rawConfig;
-                // 禁止返回
-                if (oConf.ok && oConf.ok.call(that) === true) {
-                    return;
-                }
-                that.close(true);
             }
         }]
     }, {
@@ -107,7 +58,6 @@ var oPopup = new Popup({
         initMask: fInitMask,
         fixPosition: fFixPosition,
         close: fClose,
-        error: fError,
         getData: fGetData
     });
 
@@ -123,7 +73,7 @@ var oPopup = new Popup({
         var that = this;
         var oConf = that.rawConfig;
         if (!that.maskEl) {
-            that.maskEl = $('<div class="masklayer" style="position:absolute;z-index:' + (Popup.zIndex++) + '"></div>');
+            that.maskEl = $('<div class="masklayer" style="z-index:' + (Popup.zIndex++) + '"></div>');
             oConf.renderTo.append(that.maskEl);
         }
     }
@@ -153,24 +103,23 @@ var oPopup = new Popup({
 
     function fClose(bNoEmit) {
         var that = this;
+        // 移除文件
+        var oEl = that.getEl();
+        oEl.remove();
+        // 启动滚动
+        !that.isForbidScroll && that.forbidScroll(document.body, false);
+        // 移除遮罩层
+        that.maskEl && that.maskEl.remove();
+        // 取消窗口变化事件
+        $(window).unbind('resize', that.resizeCb);
         !bNoEmit && that.emit('close');
-        that.destroy();
-    }
-
-    function fError(sContent) {
-        var that = this;
-        sContent = $.trim(sContent);
-        that.tipsEl.html(sContent);
-        that.tipsEl[sContent ? 'show' : 'hide']();
     }
 
     function fGetData(oConf) {
         var that = this;
         return {
             title: oConf.title || '提示',
-            content: oConf.content,
-            cancelTxt: oConf.cancelTxt || '取消',
-            okTxt: oConf.okTxt || '确定'
+            content: oConf.content
         };
     }
 

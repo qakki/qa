@@ -30,6 +30,11 @@ public class CommentController {
   @Autowired private CommentService commentService;
   @Autowired private QuestionService questionService;
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/6 0006
+   * @description: 添加评论
+   */
   @RequestMapping(
       path = {"/addComment"},
       method = {RequestMethod.POST})
@@ -45,10 +50,13 @@ public class CommentController {
       // 敏感词过滤
       comment.setContent(sensitiveService.filter(content));
       comment.setAddTime(new Date());
-      commentService.addComment(comment);
-      // 更新question表里的评论数
-      int commentCount = commentService.getCommentCount(SettingUtil.ENTITY_QUESTION, questionId);
-      questionService.updateCommentCount(questionId, commentCount);
+      if (commentService.addComment(comment) > 0) {
+        // 更新question表里的评论数
+        int commentCount = commentService.getCommentCount(SettingUtil.ENTITY_QUESTION, questionId);
+        questionService.updateCommentCount(questionId, commentCount);
+      } else {
+        logger.error("add comment failed!");
+      }
     } catch (Exception e) {
       logger.error("add comment failed " + e.getMessage());
     }

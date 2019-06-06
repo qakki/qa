@@ -7,7 +7,6 @@ import com.summer.qa.service.QuestionService;
 import com.summer.qa.service.SensitiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
@@ -40,9 +39,7 @@ public class QuestionServiceImpl implements QuestionService {
    */
   @Override
   public int addQuestion(Question question) {
-    question.setTitle(HtmlUtils.htmlEscape(question.getTitle()));
-    question.setContent(HtmlUtils.htmlEscape(question.getContent()));
-    // 敏感词过滤
+    // 敏感词过滤+html过滤
     question.setTitle(sensitiveService.filter(question.getTitle()));
     question.setContent(sensitiveService.filter(question.getContent()));
     return questionMapper.insertSelective(question) > 0 ? question.getId() : 0;

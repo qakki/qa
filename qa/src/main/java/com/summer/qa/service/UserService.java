@@ -18,4 +18,6 @@ public interface UserService {
   Map<String, Object> login(String name, String password);
 
   void logout(String ticket);
+
+  User getUserByName(String name);
 }
