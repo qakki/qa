@@ -25,6 +25,11 @@ public class LikeController {
   @Autowired private HostHolder hostHolder;
   @Autowired private LikeService likeService;
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/10 0010
+   * @description: 点赞入口
+   */
   @RequestMapping(
       path = {"/like"},
       method = {RequestMethod.GET, RequestMethod.POST})
@@ -38,6 +43,11 @@ public class LikeController {
     return QAUtil.getJSONString(0, String.valueOf(likeCount));
   }
 
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/10 0010
+   * @description: 点踩入口
+   */
   @RequestMapping(
       path = {"/dislike"},
       method = {RequestMethod.GET, RequestMethod.POST})
