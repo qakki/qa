@@ -5,6 +5,7 @@ import com.summer.qa.model.HostHolder;
 import com.summer.qa.model.Question;
 import com.summer.qa.model.ViewObject;
 import com.summer.qa.service.CommentService;
+import com.summer.qa.service.LikeService;
 import com.summer.qa.service.QuestionService;
 import com.summer.qa.service.UserService;
 import com.summer.qa.util.QAUtil;
@@ -33,6 +34,7 @@ public class QuestionController {
   @Autowired private UserService userService;
   @Autowired private HostHolder hostHolder;
   @Autowired private CommentService commentService;
+  @Autowired private LikeService likeService;
 
   /**
    * @author: lightingSummer
@@ -83,6 +85,15 @@ public class QuestionController {
       for (Comment comment : comments) {
         ViewObject vo = new ViewObject();
         vo.set("comment", comment);
+        if (hostHolder.getUser() == null) {
+          vo.set("like", 0);
+        } else {
+          vo.set(
+              "like",
+              likeService.getLikeStatus(
+                  hostHolder.getUser().getId(), SettingUtil.ENTITY_COMMENT, comment.getId()));
+        }
+        vo.set("likeCount", likeService.getLikeCount(SettingUtil.ENTITY_COMMENT, comment.getId()));
         vo.set("user", userService.getUserById(comment.getUserId()));
         vos.add(vo);
       }

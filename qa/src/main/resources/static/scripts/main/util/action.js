@@ -9,7 +9,7 @@
     /**
      * 喜欢
      * @param   {Object} oConf
-     *  @param  {String} oConf.newsId 对象id
+     *  @param  {String} oConf.commentId 对象id
      *  @param  {Function} oConf.call 成功回调
      *  @param  {Function} oConf.error 失败回调
      *  @param  {Function} oConf.always 操作的回调
@@ -18,7 +18,7 @@
         var that = this;
         that.post({
             url: '/like',
-            data: {newsId: oConf.newsId},
+            data: {commentId: oConf.commentId},
             call: oConf.call,
             error: oConf.error,
             always: oConf.always
@@ -28,7 +28,7 @@
     /**
      * 不喜欢
      * @param   {Object} oConf
-     *  @param  {String} oConf.newsId 对象id
+     *  @param  {String} oConf.commentId 对象id
      *  @param  {Function} oConf.call 成功回调
      *  @param  {Function} oConf.error 失败回调
      *  @param  {Function} oConf.always 操作的回调
@@ -37,7 +37,7 @@
         var that = this;
         that.post({
             url: '/dislike',
-            data: {newsId: oConf.newsId},
+            data: {commentId: oConf.commentId},
             call: oConf.call,
             error: oConf.error,
             always: oConf.always

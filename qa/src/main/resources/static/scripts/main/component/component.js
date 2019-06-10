@@ -13,6 +13,7 @@
         render: fRender,
         getEl: fGetEl,
         html: fHtml,
+        destroy: fDestroy,
         getData: fGetData,
         // 禁止滚动
         forbidScroll: fForbidScroll,
@@ -83,6 +84,14 @@
         /* jshint ignore:end */
         sHtml = sHtml.replace('class="', 'class="' + (oConf.cls || '') + ' ');
         return sHtml;
+    }
+
+    function fDestroy() {
+        var that = this;
+        var oEl = that.getEl();
+        oEl.remove();
+        that.emit('destroy');
+        that.unbindAll();
     }
 
     function fGetData(oConf) {
