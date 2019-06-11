@@ -15,4 +15,6 @@ public interface CommentService {
   int getCommentCount(int entityType, int entityId);
 
   List<Comment> getCommentsByEntity(int entityType, int entityId);
+
+  Comment getCommentById(int id);
 }

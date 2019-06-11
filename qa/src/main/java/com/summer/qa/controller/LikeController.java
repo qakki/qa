@@ -1,6 +1,10 @@
 package com.summer.qa.controller;
 
+import com.summer.qa.async.EventModel;
+import com.summer.qa.async.EventProducer;
+import com.summer.qa.async.EventType;
 import com.summer.qa.model.HostHolder;
+import com.summer.qa.service.CommentService;
 import com.summer.qa.service.LikeService;
 import com.summer.qa.util.QAUtil;
 import com.summer.qa.util.SettingUtil;
@@ -24,6 +28,8 @@ public class LikeController {
 
   @Autowired private HostHolder hostHolder;
   @Autowired private LikeService likeService;
+  @Autowired private EventProducer eventProducer;
+  @Autowired private CommentService commentService;
 
   /**
    * @author: lightingSummer
@@ -40,6 +46,16 @@ public class LikeController {
     }
     long likeCount =
         likeService.like(hostHolder.getUser().getId(), SettingUtil.ENTITY_COMMENT, commentId);
+
+    // 异步处理点赞，站内信通知
+    EventModel eventModel = new EventModel();
+    eventModel.setType(EventType.LIKE_EVENT);
+    eventModel.setActorId(hostHolder.getUser().getId());
+    eventModel.setEntityType(SettingUtil.ENTITY_COMMENT);
+    eventModel.setEntityId(commentId);
+    eventModel.setEventOwnerId(commentService.getCommentById(commentId).getUserId());
+    eventProducer.addEvent(eventModel);
+
     return QAUtil.getJSONString(0, String.valueOf(likeCount));
   }
 

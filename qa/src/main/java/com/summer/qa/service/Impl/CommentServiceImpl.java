@@ -32,4 +32,9 @@ public class CommentServiceImpl implements CommentService {
   public List<Comment> getCommentsByEntity(int entityType, int entityId) {
     return commentMapper.selectCommentsByEntity(entityType, entityId);
   }
+
+  @Override
+  public Comment getCommentById(int id) {
+    return commentMapper.selectByPrimaryKey(id);
+  }
 }
