@@ -44,7 +44,9 @@ public class MessageHandler implements EventHandler {
         User user = userService.getUserById(model.getActorId());
         message.setContent(
             "您的评论 "
-                + comment.getContent().substring(0, 5)
+                + (comment.getContent().length() < 5
+                    ? comment.getContent()
+                    : comment.getContent().substring(0, 5))
                 + "... 被用户 "
                 + user.getName()
                 + " 赞了一下！");
@@ -52,13 +54,25 @@ public class MessageHandler implements EventHandler {
         Question question = questionService.getQuestionById(model.getEntityId());
         User user = userService.getUserById(model.getActorId());
         message.setContent(
-            "您的问题 " + question.getTitle().substring(0, 5) + "... 被用户 " + user.getName() + " 赞了一下！");
+            "您的问题 "
+                + (question.getTitle().length() < 5
+                    ? question.getTitle()
+                    : question.getTitle().substring(0, 5))
+                + "... 被用户 "
+                + user.getName()
+                + " 赞了一下！");
       }
     } else if (model.getType() == EventType.COMMENT_EVENT) {
       Question question = questionService.getQuestionById(model.getEntityId());
       User user = userService.getUserById(model.getActorId());
       message.setContent(
-          "您的问题 " + question.getTitle().substring(0, 5) + "... 被用户 " + user.getName() + " 评论了！");
+          "您的问题 "
+              + (question.getTitle().length() < 5
+                  ? question.getTitle()
+                  : question.getTitle().substring(0, 5))
+              + "... 被用户 "
+              + user.getName()
+              + " 评论了！");
     }
     messageService.addMessage(message);
   }

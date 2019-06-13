@@ -1,10 +1,10 @@
 package com.summer.qa.async;
 
 import com.alibaba.fastjson.JSONObject;
-import com.summer.qa.util.JedisAdapter;
-import com.summer.qa.util.RedisKeyUtil;
+import com.summer.qa.util.RabbitMqConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,21 +17,20 @@ import org.springframework.stereotype.Component;
 public class EventProducer {
   private static final Logger logger = LoggerFactory.getLogger(EventProducer.class);
   /** rabbitmq */
-  /*
-    @Autowired private AmqpTemplate rabbitTemplate;
+  @Autowired private AmqpTemplate rabbitTemplate;
 
-    public boolean addEvent(EventModel event) {
-      try {
-        String msg = JSONObject.toJSONString(event);
-        this.rabbitTemplate.convertAndSend(RabbitMqConfig.QUEUE, msg);
-        return true;
-      } catch (Exception e) {
-        logger.error("add event error " + e.getMessage());
-        return false;
-      }
+  public boolean addEvent(EventModel event) {
+    try {
+      String msg = JSONObject.toJSONString(event);
+      this.rabbitTemplate.convertAndSend(RabbitMqConfig.QUEUE, msg);
+      return true;
+    } catch (Exception e) {
+      logger.error("add event error " + e.getMessage());
+      return false;
     }
-  */
+  }
 
+  /*
   @Autowired private JedisAdapter jedisAdapter;
 
   public boolean addEvent(EventModel event) {
@@ -44,5 +43,5 @@ public class EventProducer {
       logger.error("add event error " + e.getMessage());
       return false;
     }
-  }
+  }*/
 }

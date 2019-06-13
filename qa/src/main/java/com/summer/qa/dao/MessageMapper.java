@@ -71,13 +71,15 @@ public interface MessageMapper {
   })
   int updateByPrimaryKey(Message record);
 
+  // 坑人的5.7版本
   @Select({
-    "select count(0) as id,  from_id, to_id, created_date, has_read, conversation_id, content ",
+    "select cnt as id,  from_id, to_id, created_date, has_read, conversation_id, content ",
     "from ",
     "(select id, from_id, to_id, created_date, has_read, conversation_id, content "
         + "from tb_message where from_id=#{userId} or to_id=#{userId} "
         + "order by id desc "
         + ") tt",
+    "INNER JOIN( select max(id) d,count(0) as cnt  from tb_message GROUP BY conversation_id) a on tt.id=a.d",
     "group by conversation_id order by created_date desc"
   })
   List<Message> selectConversationListByUserId(int userId);

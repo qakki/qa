@@ -2,9 +2,10 @@ package com.summer.qa.async;
 
 import com.alibaba.fastjson.JSON;
 import com.summer.qa.util.JedisAdapter;
-import com.summer.qa.util.RedisKeyUtil;
+import com.summer.qa.util.RabbitMqConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
         }
       }
     }
-
+    /*
     Thread thread =
         new Thread(
             () -> {
@@ -73,7 +74,26 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
               }
             });
 
-    thread.start();
+    thread.start();*/
+  }
+
+  /**
+   * @author: lightingSummer
+   * @date: 2019/6/13 0013
+   * @description: rabbitMq 消费事件
+   */
+  @RabbitListener(queues = RabbitMqConfig.QUEUE)
+  public void eventConsumer(String message) {
+    // 事件合法性检测
+    EventModel eventModel = JSON.parseObject(message, EventModel.class);
+    if (!config.containsKey(eventModel.getType())) {
+      logger.error("不能识别的事件");
+      return;
+    }
+    // 处理事件
+    for (EventHandler handler : config.get(eventModel.getType())) {
+      handler.doHandle(eventModel);
+    }
   }
 
   @Override

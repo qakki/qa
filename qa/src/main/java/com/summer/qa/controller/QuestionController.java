@@ -1,13 +1,7 @@
 package com.summer.qa.controller;
 
-import com.summer.qa.model.Comment;
-import com.summer.qa.model.HostHolder;
-import com.summer.qa.model.Question;
-import com.summer.qa.model.ViewObject;
-import com.summer.qa.service.CommentService;
-import com.summer.qa.service.LikeService;
-import com.summer.qa.service.QuestionService;
-import com.summer.qa.service.UserService;
+import com.summer.qa.model.*;
+import com.summer.qa.service.*;
 import com.summer.qa.util.QAUtil;
 import com.summer.qa.util.SettingUtil;
 import org.slf4j.Logger;
@@ -35,6 +29,7 @@ public class QuestionController {
   @Autowired private HostHolder hostHolder;
   @Autowired private CommentService commentService;
   @Autowired private LikeService likeService;
+  @Autowired private FollowService followService;
 
   /**
    * @author: lightingSummer
@@ -98,6 +93,31 @@ public class QuestionController {
         vos.add(vo);
       }
       model.addAttribute("comments", vos);
+
+      List<ViewObject> followUsers = new ArrayList<ViewObject>();
+      // 获取关注的用户信息
+      List<Integer> users = followService.getFollowers(SettingUtil.ENTITY_QUESTION, qid, 20);
+      for (Integer userId : users) {
+        ViewObject vo = new ViewObject();
+        User u = userService.getUserById(userId);
+        if (u == null) {
+          continue;
+        }
+        vo.set("name", u.getName());
+        vo.set("headUrl", u.getHeadUrl());
+        vo.set("id", u.getId());
+        followUsers.add(vo);
+      }
+      model.addAttribute("followUsers", followUsers);
+      if (hostHolder.getUser() != null) {
+        model.addAttribute(
+            "followed",
+            followService.isFollower(
+                hostHolder.getUser().getId(), SettingUtil.ENTITY_QUESTION, qid));
+      } else {
+        model.addAttribute("followed", false);
+      }
+
     } catch (Exception e) {
       logger.error("get question detail failed " + e.getMessage());
     }

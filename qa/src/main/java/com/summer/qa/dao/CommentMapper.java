@@ -78,6 +78,9 @@ public interface CommentMapper {
   })
   int selectCountByEntity(@Param("entityType") int entityType, @Param("entityId") int entityId);
 
+  @Select({"select count(0)", "from tb_comment", "where user_id = #{userId}"})
+  int selectUserCommentCount(int userId);
+
   @Select({
     "select",
     "id, user_id, entity_id, entity_type, add_time, is_del, content",
