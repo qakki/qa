@@ -15,6 +15,7 @@ public class RedisKeyUtil {
   private static String BIZ_FOLLOWER = "FOLLOWER";
   // 关注对象
   private static String BIZ_FOLLOWEE = "FOLLOWEE";
+  private static String BIZ_TIMELINE = "QA_TIMELINE";
 
   public static String getEventQueueKey() {
     return BIZ_EVENT;
@@ -36,5 +37,9 @@ public class RedisKeyUtil {
   // 每个用户对某类实体的关注key
   public static String getFolloweeKey(int userId, int entityType) {
     return BIZ_FOLLOWEE + SPLIT + String.valueOf(userId) + SPLIT + String.valueOf(entityType);
+  }
+
+  public static String getTimelineKey(int userId) {
+    return BIZ_TIMELINE + SPLIT + String.valueOf(userId);
   }
 }
