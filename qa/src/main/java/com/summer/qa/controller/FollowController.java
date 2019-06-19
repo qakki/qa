@@ -36,12 +36,14 @@ public class FollowController {
   @Autowired EventProducer eventProducer;
 
   @RequestMapping(
-      path = {"/followUser"},
+      path = {"/follow/followUser"},
       method = {RequestMethod.POST, RequestMethod.GET})
   @ResponseBody
   public String followUser(@RequestParam("userId") int userId) {
     if (hostHolder.getUser() == null) {
       return QAUtil.getJSONString(999);
+    } else if (hostHolder.getUser().getId() == userId) {
+      return QAUtil.getJSONString(1, "不能关注自己");
     }
 
     boolean ret =
@@ -55,7 +57,7 @@ public class FollowController {
   }
 
   @RequestMapping(
-      path = {"/unfollowUser"},
+      path = {"/follow/unfollowUser"},
       method = {RequestMethod.POST})
   @ResponseBody
   public String unfollowUser(@RequestParam("userId") int userId) {
@@ -74,7 +76,7 @@ public class FollowController {
   }
 
   @RequestMapping(
-      path = {"/followQuestion"},
+      path = {"/follow/followQuestion"},
       method = {RequestMethod.POST})
   @ResponseBody
   public String followQuestion(@RequestParam("questionId") int questionId) {
@@ -99,7 +101,7 @@ public class FollowController {
   }
 
   @RequestMapping(
-      path = {"/unfollowQuestion"},
+      path = {"/follow/unfollowQuestion"},
       method = {RequestMethod.POST})
   @ResponseBody
   public String unfollowQuestion(@RequestParam("questionId") int questionId) {

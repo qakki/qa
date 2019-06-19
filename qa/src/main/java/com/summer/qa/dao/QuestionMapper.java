@@ -83,4 +83,7 @@ public interface QuestionMapper {
   })
   @SelectProvider(type = QuestionSqlProvider.class, method = "selectByIdAndTimeDesc")
   List<Question> selectByIdAndTimeDesc(@Param("userId") Integer userId);
+
+  @SelectProvider(type = QuestionSqlProvider.class, method = "selectQuestionCount")
+  int selectQuestionCount(@Param("userId") Integer userId);
 }

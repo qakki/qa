@@ -20,6 +20,16 @@ public class QuestionSqlProvider {
     return sb.toString();
   }
 
+  public String selectQuestionCount(@Param("userId") Integer userId) {
+    StringBuilder sb = new StringBuilder();
+    sb.append("select " + " count(0) " + " from  tb_question " + " where ");
+    if (userId != 0) {
+      sb.append(" user_id = #{userId} and ");
+    }
+    sb.append(" is_del = 0  ");
+    return sb.toString();
+  }
+
   public String insertSelective(Question record) {
     SQL sql = new SQL();
     sql.INSERT_INTO("tb_question");

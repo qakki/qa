@@ -45,9 +45,11 @@ public class CommentController {
   public String addComment(
       @RequestParam("questionId") int questionId, @RequestParam("content") String content) {
     try {
+      if (hostHolder.getUser() == null) {
+        return "redirect:" + SettingUtil.QA_DOMAIN + "/reglogin";
+      }
       Comment comment = new Comment();
-      // 之后做权限控制之后 在去掉这个匿名
-      int userId = hostHolder.getUser() == null ? 1 : hostHolder.getUser().getId();
+      int userId = hostHolder.getUser().getId();
       comment.setUserId(userId);
       comment.setEntityType(SettingUtil.ENTITY_QUESTION);
       comment.setEntityId(questionId);

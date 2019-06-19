@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.Random;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,6 +30,18 @@ public class QaApplicationTests {
 
   @Test
   public void contextLoads() {}
+
+  @Test
+  public void userUpdate() {
+    for (int i = 96; i <= 207; i++) {
+      User user = new User();
+      user.setId(i);
+      user.setHeadUrl(
+          String.format("http://images.nowcoder.com/head/%dt.png", new Random().nextInt(1000)));
+      user.setName("User" + i);
+      userMapper.updateByPrimaryKeySelective(user);
+    }
+  }
 
   @Test
   public void userTest1() {

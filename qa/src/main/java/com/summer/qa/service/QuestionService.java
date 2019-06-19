@@ -18,4 +18,6 @@ public interface QuestionService {
   Question getQuestionById(int id);
 
   int updateCommentCount(int id, int commentCount);
+
+  int getQuestionCount(int userId);
 }

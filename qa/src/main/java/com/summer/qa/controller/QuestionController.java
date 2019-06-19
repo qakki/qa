@@ -73,7 +73,7 @@ public class QuestionController {
     try {
       Question question = questionService.getQuestionById(qid);
       model.addAttribute("question", question);
-      model.addAttribute("user", userService.getUserById(question.getUserId()));
+      // model.addAttribute("user", userService.getUserById(question.getUserId()));
       // 查阅评论
       List<ViewObject> vos = new ArrayList<>();
       List<Comment> comments = commentService.getCommentsByEntity(SettingUtil.ENTITY_QUESTION, qid);

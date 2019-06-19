@@ -67,4 +67,9 @@ public class QuestionServiceImpl implements QuestionService {
     question.setCommentCount(commentCount);
     return questionMapper.updateByPrimaryKeySelective(question);
   }
+
+  @Override
+  public int getQuestionCount(int userId) {
+    return questionMapper.selectQuestionCount(userId);
+  }
 }
