@@ -6,7 +6,7 @@ package com.summer.qa.util;
  * @description：
  */
 public class SettingUtil {
-  public static final String QA_DOMAIN = "http://127.0.0.1:8080/";
+  public static final String QA_DOMAIN = "https://qa.lightingsummer.club/";
 
   public static final int ENTITY_QUESTION = 0;
   public static final int ENTITY_COMMENT = 1;
